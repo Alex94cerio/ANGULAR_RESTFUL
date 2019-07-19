@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#">
+    <app-button-detail [action]="ACTIONS.home" [button]="BUTTONS.navHome"></app-button-detail>
+  </a>
+  <div >
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dropDownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <app-button-detail [button]="BUTTONS.navUsers"></app-button-detail>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropDownUser">
+          <a class="dropdown-item">
+            <app-button-detail [action]="ACTIONS.userList" [button]="BUTTONS.userList"></app-button-detail>
+          </a>
+          <a class="dropdown-item">
+            <app-button-detail [action]="ACTIONS.addUser" [button]="BUTTONS.addUser"></app-button-detail>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dropDownRole" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <app-button-detail [button]="BUTTONS.navRoles"></app-button-detail>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropDownRole">
+          <a class="dropdown-item">
+            <app-button-detail [action]="ACTIONS.roleList" [button]="BUTTONS.roleList"></app-button-detail>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

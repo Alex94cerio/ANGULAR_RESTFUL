@@ -1,0 +1,15 @@
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.dropdown-item:active {
+  color:#16181b;
+  text-decoration:none;
+  background-color: rgba( 0, 0, 0, 0.1) !important;
+}
+
+.dropdown-item:hover {
+  color:#16181b;
+  text-decoration:none;
+  background-color:#f8f9fa
+}

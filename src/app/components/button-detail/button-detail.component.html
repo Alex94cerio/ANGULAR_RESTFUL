@@ -1,0 +1,12 @@
+<button
+  [className]=" (button.class && button.class.length > 0) ? button.class.join(' ') : 'btn btn-primary'"
+  [type]="(button.type) ? 'submit' : 'button'"
+  [routerLink]="link? link : null"
+>
+  <div *ngIf="(button.label || button.icon);then someLabel else emptyLabel"></div>
+  <ng-template #emptyLabel>Empty Label</ng-template>
+  <ng-template #someLabel>
+    <i  *ngIf="button.icon && button.icon.length > 0" [className]="button.icon.join(' ')" aria-hidden="true"></i>
+    <span *ngIf="button.label">{{button.label}}</span>
+  </ng-template>
+</button>

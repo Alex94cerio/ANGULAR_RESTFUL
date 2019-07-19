@@ -1,0 +1,26 @@
+.active {
+  color: lightblue !important;
+  font-size: 150%;
+
+}
+
+.header-table-cell:hover{
+  background-color:#505962!important;
+  color:#fff!important;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.dropdown-item:active {
+  color:#16181b;
+  text-decoration:none;
+  background-color: rgba( 0, 0, 0, 0.1) !important;
+}
+
+.dropdown-item:hover {
+  color:#16181b;
+  text-decoration:none;
+  background-color:#f8f9fa
+}

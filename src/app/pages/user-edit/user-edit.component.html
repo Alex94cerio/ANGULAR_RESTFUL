@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row form-group justify-content-center">
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="firstname" >First Name</label>
+      <input type="text" id="firstname" [(ngModel)]="user.firstName" class="form-control input-sm"/>
+      <div *ngIf="errors?.firstName" class="text-capitalize text-danger text-center">{{errors.firstName}}</div>
+    </div>
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="lastname">Last Name</label>
+      <input type="text" id="lastname" [(ngModel)]="user.lastName" class="form-control input-sm"/>
+      <div *ngIf="errors?.lastName" class="text-capitalize text-danger text-center">{{errors.lastName}}</div>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="country" >Country</label>
+      <input type="text" id="country" [(ngModel)]="user.country" class="form-control input-sm"/>
+      <div *ngIf="errors?.country" class="text-capitalize text-danger text-center">{{errors.country}}</div>
+    </div>
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="birthdate">Birthdate</label>
+      <input type="date" id="birthdate" [(ngModel)]="user.birthdate" class="form-control input-sm" />
+      <div *ngIf="errors?.birthdate" class="text-capitalize text-danger text-center">{{errors.birthdate}}</div>
+    </div>
+  </div>
+  <div class="row form-group justify-content-center">
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="firstname" >Role</label>
+      <select class="form-control input-sm" type="number" [(ngModel)]="user.role" [compareWith]="compareById">
+        <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="firstname" >Marital Status</label>
+      <select class="form-control input-sm" type="number" [(ngModel)]="user.maritalStatus" [compareWith]="compareById">
+        <option *ngFor="let marital of maritalStatuses" [ngValue]="marital">{{marital.name}}</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="w-100 text-center font-weight-bold" for="firstname" >Skills</label>
+      <select class="form-control input-sm" type="number" [(ngModel)]="user.skillList" [compareWith]="compareById" multiple>
+        <option *ngFor="let skill of skills" [ngValue]="skill">{{skill.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <app-button-detail [button]="BUTTONS.save" (click)="save()"></app-button-detail>
+    </div>
+    <div class="col text-center">
+      <app-button-detail [button]="BUTTONS.back" (click)="goBack()"></app-button-detail>
+    </div>
+  </div>
+</div>
+

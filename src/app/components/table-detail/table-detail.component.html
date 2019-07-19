@@ -1,0 +1,84 @@
+<h2>Table: <i>{{tabConf?.id}}</i></h2>
+<div class="row">
+  <div class="col-3">
+    <ngb-pagination class="d-inline-block" [id]="tabConf?.id" [collectionSize]="(filterByColumn(elements, searchText, searchColumn)).length" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+  </div>
+  <div class="col">
+    <label for="searchColumn">
+      <select  id="searchColumn" [(ngModel)]="searchColumn">
+        <option [ngValue]=""></option>
+        <option *ngFor="let field of tabConf?.header" [ngValue]="field.columnName">{{field.columnLabel}}</option>
+      </select>
+    </label>
+    <input class="form-control" type="text" name="searchText" [(ngModel)]="searchText" autocomplete="off" placeholder="Enter the text to filter to">
+  </div>
+  <div class="col-4">
+    <span class="font-weight-bold">Rows per page: </span>
+    <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Page Size" [(ngModel)]="pageSize">
+      <mat-button-toggle class="btn-secondary" [ngClass]="pageSize == 5 ? 'active' : ''" [value]="5">5</mat-button-toggle>
+      <mat-button-toggle class="btn-secondary" [ngClass]="pageSize == 10 ? 'active' : ''" [value]="10">10</mat-button-toggle>
+      <mat-button-toggle class="btn-secondary" [ngClass]="pageSize == 15 ? 'active' : ''" [value]="15">15</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-bordered">
+      <!--  HEADER ROW  -->
+      <tr class="text-center text-capitalize font-weight-bold">
+        <th class="p-3 align-content-center" style="table-layout: fixed"
+            *ngFor="let field of tabConf?.header"
+            [ngClass]="{'bg-dark text-white': field.columnName == currentOrder, 'header-table-cell': field.sortable }"
+            (click)="field.sortable? orderBy(field.columnName) : null"
+        >
+          <div *ngIf="field.sortable">
+            <ng-container *ngIf=" currentOrder !== field.columnName || orderAsc; then arrowDown else arrowUp"></ng-container>
+            <ng-template #arrowDown>
+              <i class="fa fa-arrow-circle-down"></i>
+            </ng-template>
+            <ng-template #arrowUp>
+              <i class="fa fa-arrow-circle-up"></i>
+            </ng-template>
+          </div>
+          {{field.columnLabel}}
+        </th>
+        <th>Actions</th>
+      </tr>
+
+      <!--  ELEMENT ROWS  -->
+      <tr *ngFor="let elem of (filterByColumn(elements, searchText, searchColumn)) | slice: ((page-1) * pageSize) : (((page - 1) * pageSize) + pageSize)">
+        <td *ngFor="let field of tabConf?.header" class="p-3 text-center" >
+          {{getParam(elem, field.columnName)}}
+        </td>
+        <td class="p-3 text-center">
+          <div class="dropdown" *ngIf="tabConf.actions">
+            <app-button-detail [button]="BUTTONS.dropdown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></app-button-detail>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" *ngFor="let action of tabConf.actions">
+                <app-button-detail [action]="action" [button]="getParam(BUTTONS, action.buttonPath)" [actionValue]="getParam(elem, getKeyOfTabElem())"></app-button-detail>
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row justify-content-between">
+  <div class="col-3">
+    <ngb-pagination class="d-inline-block" [id]="tabConf?.id" [collectionSize]="(filterByColumn(elements, searchText, searchColumn)).length" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+  </div>
+
+  <div class="col-4">
+    <span class="font-weight-bold">Rows per page: </span>
+    <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Page Size" [(ngModel)]="pageSize">
+      <mat-button-toggle class="btn-primary" [ngClass]="pageSize == 5 ? 'active' : ''" [value]="5">5</mat-button-toggle>
+      <mat-button-toggle class="btn-primary" [ngClass]="pageSize == 10 ? 'active' : ''" [value]="10">10</mat-button-toggle>
+      <mat-button-toggle class="btn-primary" [ngClass]="pageSize == 15 ? 'active' : ''" [value]="15">15</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+
+
+
+
